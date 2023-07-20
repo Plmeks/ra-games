@@ -25,4 +25,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - SSR implemented for /game/:id page
 - styled-components (no ssr support with the new Next.js App Router)
 - TailwindCSS (for easy-styling and ssr support)
-- react-query for caching and working with api (also supposed to be a state-manager)
+- react-query for state management, caching and data fetching
