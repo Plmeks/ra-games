@@ -30,10 +30,9 @@ const NavbarContainer = styled.div`
     justify-content: center;
     text-align: center;
 
-    .navbar-logo {
-      margin: 10px 0;
-      padding: 0;
-      font-size: 20px;
+    a {
+      text-align: center;
+      margin: 0;
     }
   }
 `;

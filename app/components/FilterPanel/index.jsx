@@ -42,20 +42,20 @@ const SortContainer = styled.div`
   display: flex;
   margin-left: 35px;
 
-  .sort-option {
+  .option {
     margin-right: 12px;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
-  .sort-option .sort-icon {
+  .option .icon {
     margin-left: 3px;
     font-size: 16px;
     min-width: 16px;
   }
 
-  .sort-option:hover {
+  .option:hover {
     opacity: 0.56;
   }
 
@@ -122,13 +122,13 @@ export default function FilterPanel({
       />
       <div className="subfilters-container flex md:w-auto w-full">
         <SortContainer>
-          <div className="sort-option" onClick={() => handleSort("released")}>
+          <div className="option" onClick={() => handleSort("released")}>
             By Date{" "}
-            <span className="sort-icon mt-1">{getOrderIcon("released")}</span>
+            <span className="icon mt-1">{getOrderIcon("released")}</span>
           </div>
-          <div className="sort-option" onClick={() => handleSort("rating")}>
+          <div className="option" onClick={() => handleSort("rating")}>
             By Rating{" "}
-            <span className="sort-icon mt-1">{getOrderIcon("rating")}</span>
+            <span className="icon mt-1">{getOrderIcon("rating")}</span>
           </div>
         </SortContainer>
         <FilterContainer>
