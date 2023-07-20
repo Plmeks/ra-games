@@ -18,3 +18,11 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Comments
+
+- Nexts.js v.18 project with the new App Router
+- SSR implemented for /game/:id page
+- styled-components (no ssr support with the new Next.js App Router)
+- TailwindCSS (for easy-styling and ssr support)
+- react-query for caching and working with api (also supposed to be a state-manager)
