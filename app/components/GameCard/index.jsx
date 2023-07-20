@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { AiOutlineCalendar, AiOutlineStar } from "react-icons/ai";
 import { styled } from "styled-components";
+import missingImage from "../../assets/image-missing.png";
 
 const GameCardWrapper = styled.div`
   background-color: #f2f2f2;
@@ -61,7 +62,7 @@ export default function GameCard({ id, name, poster, rating, released }) {
   return (
     <Link href={`game/${id}`} className="no-underline">
       <GameCardWrapper>
-        <GamePoster poster={poster} />
+        <GamePoster poster={poster || missingImage.src} />
         <GameTitle>{name}</GameTitle>
         <GameInfoContainer>
           <GameReleaseDate>
