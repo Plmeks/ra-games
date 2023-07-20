@@ -13,12 +13,13 @@ const FooterContainer = styled.footer`
   }
 
   .logo {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
   }
 
   .copyright {
     margin-top: 10px;
+    font-size: 14px;
   }
 
   @media (max-width: 767px) {
