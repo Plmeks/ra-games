@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce";
@@ -22,6 +23,8 @@ export default function Home() {
   const [order, setOrder] = useState("");
   const [filteredPlatform, setFilteredPlatform] = useState("");
 
+  const queryClient = useQueryClient();
+
   const {
     data: pagesWithGames,
     error,
@@ -37,16 +40,35 @@ export default function Home() {
     platform: filteredPlatform,
   });
 
-  const performSearchWithDelay = useDebouncedCallback((searchQuery) => {
-    setSearchQuery(searchQuery);
-  }, 700);
+  const clearPagesCacheAfterFiltering = useCallback(() => {
+    queryClient.setQueryData(["games"], (old) => ({
+      pagesParams: [],
+      pages: [old.pages[0]],
+    }));
+  }, [queryClient]);
 
-  const performFilterByPlatform = useCallback((platformId) => {
-    setFilteredPlatform(platformId);
-  }, []);
+  const performSearchWithDelay = useDebouncedCallback(
+    useCallback(
+      (searchQuery) => {
+        clearPagesCacheAfterFiltering();
+        setSearchQuery(searchQuery);
+      },
+      [clearPagesCacheAfterFiltering]
+    ),
+    700
+  );
+
+  const performFilterByPlatform = useCallback(
+    (platformId) => {
+      clearPagesCacheAfterFiltering();
+      setFilteredPlatform(platformId);
+    },
+    [clearPagesCacheAfterFiltering]
+  );
 
   const performSort = useCallback(
     (orderField) => {
+      clearPagesCacheAfterFiltering();
       setOrder(
         order === orderField
           ? `-${orderField}`
@@ -55,7 +77,7 @@ export default function Home() {
           : orderField
       );
     },
-    [order]
+    [order, clearPagesCacheAfterFiltering]
   );
 
   const isScrolledToPageBottom = useDetectScrollPageBottom();
@@ -80,22 +102,20 @@ export default function Home() {
           handleSort={performSort}
         />
         <GamesGrid>
-          <>
-            {pagesWithGames?.pages?.map((pageWithGames, i) => (
-              <React.Fragment key={i}>
-                {pageWithGames.results.map((game) => (
-                  <GameCard
-                    key={game.id}
-                    id={game.id}
-                    name={game.name}
-                    poster={game.background_image}
-                    rating={game.rating}
-                    released={game.released}
-                  />
-                ))}
-              </React.Fragment>
-            ))}
-          </>
+          {pagesWithGames?.pages?.map((pageWithGames, i) => (
+            <React.Fragment key={i}>
+              {pageWithGames.results.map((game) => (
+                <GameCard
+                  key={game.id}
+                  id={game.id}
+                  name={game.name}
+                  poster={game.background_image}
+                  rating={game.rating}
+                  released={game.released}
+                />
+              ))}
+            </React.Fragment>
+          ))}
         </GamesGrid>
       </>
       {status !== "loading" && (

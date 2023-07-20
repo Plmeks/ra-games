@@ -17,7 +17,7 @@ const PrimaryButtonContainer = styled.div`
   }
 
   button:hover {
-    background-color: #0056b3;
+    opacity: 0.7;
   }
 
   button:disabled {
