@@ -10,12 +10,22 @@ import Loader from "./components/Loader";
 import PrimaryButton from "./components/PrimaryButton";
 import { useDetectScrollPageBottom, useGetInfiniteGamesList } from "./hooks";
 
+const MainContainer = styled.main`
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 20px;
+
+  @media (max-width: 768px) {
+    padding-top: 0;
+  }
+`;
+
 const GamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 20px;
-  margin-top: 42px;
+  margin-top: 20px;
 `;
 
 export default function Home() {
@@ -93,7 +103,7 @@ export default function Home() {
   }, [refetch, searchQuery, order, filteredPlatform]);
 
   return (
-    <main className="relative">
+    <MainContainer>
       <>
         <FilterPanel
           order={order}
@@ -138,6 +148,6 @@ export default function Home() {
           containerClass={status === "loading" ? "opacity-1" : "opacity-[0.5]"}
         />
       )}
-    </main>
+    </MainContainer>
   );
 }

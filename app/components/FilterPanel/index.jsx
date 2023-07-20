@@ -9,9 +9,13 @@ const FilterPanelContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
   @media (max-width: 768px) {
     flex-direction: column;
+    border-radius: 0;
+    padding-top: 20px;
 
     .subfilters-container {
       flex-direction: column-reverse;

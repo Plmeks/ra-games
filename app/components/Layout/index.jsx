@@ -6,13 +6,12 @@ import Navbar from "../Navbar";
 
 const Content = styled.div`
   padding: 0 2rem;
-  margin-top: 60px;
+  margin-top: 50px;
   margin-bottom: 60px;
   min-height: 100%;
 
   @media (max-width: 768px) {
     padding: 0;
-    margin-top: 50px;
   }
 `;
 
