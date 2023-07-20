@@ -23,6 +23,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Nexts.js project with the new App Router
 - SSR implemented for /game/:id page
+- react-query for state management, caching and data fetching
 - styled-components (no ssr support with the new Next.js App Router)
 - TailwindCSS (for easy-styling and ssr support)
-- react-query for state management, caching and data fetching
