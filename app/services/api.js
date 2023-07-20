@@ -1,5 +1,5 @@
 // TODO: Move to .env
-const RAWR_API_KEY = process.env.NEXT_PUBLIC_RAWR_API_KEY;
+const RAWR_API_KEY = "b8938cdf849f40a3951c7bd772159fb6";
 
 console.log(process);
 // SSR response
