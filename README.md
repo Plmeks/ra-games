@@ -1,7 +1,5 @@
 ## Demo
 
-This is a test task for Ra Delta
-
 Application is in production and deployed on:
 https://ra-games.vercel.app/
 
