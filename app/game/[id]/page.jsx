@@ -24,7 +24,7 @@ export default async function Page({ params }) {
           )}
         </div>
         <div className="p-4">
-          <p
+          <div
             className="text-justify"
             dangerouslySetInnerHTML={{ __html: game.description }}
           />
