@@ -1,10 +1,11 @@
 // TODO: Move to .env
-const API_KEY = "b8938cdf849f40a3951c7bd772159fb6";
+const RAWR_API_KEY = process.env.NEXT_PUBLIC_RAWR_API_KEY;
 
+console.log(process);
 // SSR response
 export const getGameById = async (id) => {
   const response = await fetch(
-    `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
+    `https://api.rawg.io/api/games/${id}?key=${RAWR_API_KEY}`
   );
 
   return response.json();
@@ -12,7 +13,7 @@ export const getGameById = async (id) => {
 
 export const getGameScreenshotsById = async (id) => {
   const response = await fetch(
-    `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`
+    `https://api.rawg.io/api/games/${id}/screenshots?key=${RAWR_API_KEY}`
   );
 
   return response.json();
@@ -20,7 +21,7 @@ export const getGameScreenshotsById = async (id) => {
 
 export const getAllPlatforms = async () => {
   const response = await fetch(
-    `https://api.rawg.io/api/platforms?key=${API_KEY}`
+    `https://api.rawg.io/api/platforms?key=${RAWR_API_KEY}`
   );
 
   return await response.json();
@@ -28,7 +29,7 @@ export const getAllPlatforms = async () => {
 
 export const getGames = async ({ pageParam, search, order, platform }) => {
   const response = await fetch(
-    `https://api.rawg.io/api/games?key=${API_KEY}&page=${pageParam}${
+    `https://api.rawg.io/api/games?key=${RAWR_API_KEY}&page=${pageParam}${
       search && `&search=${search}`
     }${order && `&ordering=${order}`}${platform && `&platforms=${platform}`}
     `

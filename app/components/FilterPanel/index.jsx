@@ -104,9 +104,9 @@ export default function FilterPanel({
     (orderField) => (
       <>
         {order === orderField ? (
-          <AiOutlineArrowDown />
-        ) : order === `-${orderField}` ? (
           <AiOutlineArrowUp />
+        ) : order === `-${orderField}` ? (
+          <AiOutlineArrowDown />
         ) : null}
       </>
     ),
@@ -116,7 +116,7 @@ export default function FilterPanel({
   return (
     <FilterPanelContainer>
       <SearchInput
-        type="text"
+        type="search"
         placeholder="Games search"
         onChange={(e) => handleSearch(e.target.value)}
       />

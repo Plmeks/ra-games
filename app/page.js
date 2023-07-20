@@ -40,7 +40,7 @@ export default function Home() {
   const queryClient = useQueryClient();
 
   const {
-    data: pagesWithGames,
+    data,
     error,
     fetchNextPage,
     hasNextPage,
@@ -84,11 +84,11 @@ export default function Home() {
     (orderField) => {
       clearPagesCacheAfterFiltering();
       setOrder(
-        order === orderField
-          ? `-${orderField}`
-          : order === `-${orderField}`
+        order === `-${orderField}`
+          ? `${orderField}`
+          : order === `${orderField}`
           ? ""
-          : orderField
+          : `-${orderField}`
       );
     },
     [order, clearPagesCacheAfterFiltering]
@@ -116,7 +116,7 @@ export default function Home() {
           handleSort={performSort}
         />
         <GamesGrid>
-          {pagesWithGames?.pages?.map((pageWithGames, i) => (
+          {data?.pages?.map((pageWithGames, i) => (
             <React.Fragment key={i}>
               {pageWithGames.results.map((game) => (
                 <GameCard
