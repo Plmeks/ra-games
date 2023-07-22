@@ -55,34 +55,29 @@ export default function Home() {
   });
 
   const clearPagesCacheAfterFiltering = useCallback(() => {
-    queryClient.setQueryData(["games"], (old) => ({
-      pagesParams: [],
-      pages: [old.pages[0]],
-    }));
+    const currentCache = queryClient.getQueryData(["games"]);
+
+    // when we loade more than one page
+    // after new sorting/filtering/search
+    // we should clear pages cache to turn up again at first page
+    if (currentCache?.pages?.length > 1) {
+      queryClient.setQueryData(["games"], (old) => ({
+        pagesParams: [],
+        pages: [old.pages[0]],
+      }));
+    }
   }, [queryClient]);
 
-  const performSearchWithDelay = useDebouncedCallback(
-    useCallback(
-      (searchQuery) => {
-        clearPagesCacheAfterFiltering();
-        setSearchQuery(searchQuery);
-      },
-      [clearPagesCacheAfterFiltering]
-    ),
-    700
-  );
+  const performSearchWithDelay = useDebouncedCallback((searchQuery) => {
+    setSearchQuery(searchQuery);
+  }, 700);
 
-  const performFilterByPlatform = useCallback(
-    (platformId) => {
-      clearPagesCacheAfterFiltering();
-      setFilteredPlatform(platformId);
-    },
-    [clearPagesCacheAfterFiltering]
-  );
+  const performFilterByPlatform = (platformId) => {
+    setFilteredPlatform(platformId);
+  };
 
   const performSort = useCallback(
     (orderField) => {
-      clearPagesCacheAfterFiltering();
       setOrder(
         order === `-${orderField}`
           ? `${orderField}`
@@ -91,7 +86,7 @@ export default function Home() {
           : `-${orderField}`
       );
     },
-    [order, clearPagesCacheAfterFiltering]
+    [order]
   );
 
   const isScrolledToPageBottom = useDetectScrollPageBottom();
@@ -103,8 +98,15 @@ export default function Home() {
   }, [fetchNextPage, isScrolledToPageBottom]);
 
   useEffect(() => {
+    clearPagesCacheAfterFiltering();
     refetch();
-  }, [refetch, searchQuery, order, filteredPlatform]);
+  }, [
+    clearPagesCacheAfterFiltering,
+    refetch,
+    searchQuery,
+    order,
+    filteredPlatform,
+  ]);
 
   return (
     <MainContainer>

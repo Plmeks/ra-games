@@ -1,7 +1,6 @@
 // TODO: Move to .env
 const RAWR_API_KEY = "b8938cdf849f40a3951c7bd772159fb6";
 
-console.log(process);
 // SSR response
 export const getGameById = async (id) => {
   const response = await fetch(
